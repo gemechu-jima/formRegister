@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import  {useState} from 'react'
 import { CgProfile } from "react-icons/cg";
 import { CiSearch } from 'react-icons/ci';
 import { IoCalendarClearOutline } from "react-icons/io5";

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { redirect, useParams, useNavigate } from "react-router-dom";
-import { personInfo } from "./FormRegistration";
+import { useParams, useNavigate } from "react-router-dom";
+
 import Inputs from "../components/Form/Inputs";
 import RadioButton from "../components/Form/RadioButton";
 const defaultValue={
@@ -47,11 +47,11 @@ export default function UpdateUserData() {
     ev.preventDefault()
     try {
       axios.put("/api/user/update", userData)
-      .then((data:unknown)=>{
+      .then(()=>{
        alert("Update success full ")
        setUserData(defaultValue)
        navigate("/dashboard")
-      }).catch((error:unknown)=>{
+      }).catch(()=>{
         alert("error is happen ")
       })
     } catch (error: unknown) {

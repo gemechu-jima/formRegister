@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import Logo from '../UI/Logo'
 import NavLinks from './NavLinks'
-import Button from '../UI/Button'
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import Backdrop from '../UI/Backdrop';

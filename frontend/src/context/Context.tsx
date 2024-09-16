@@ -2,9 +2,9 @@ import { createContext, useContext, ReactNode, useState,useEffect } from "react"
 
 
 const GlobalContext = createContext<any>(null);
-interface ThemeMode{
-    theme:"dark" | "light"
-  }
+// interface ThemeMode{
+//     theme:"dark" | "light"
+//   }
   type Lan = "EN" | "AM" | "AO";
 
 

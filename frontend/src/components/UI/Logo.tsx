@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { IoLogoWebComponent } from "react-icons/io5";
 import { useGlobalContext } from '../../context/Context';
 export default function Logo() {

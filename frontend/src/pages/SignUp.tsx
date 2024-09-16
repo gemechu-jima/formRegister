@@ -1,12 +1,12 @@
 
-import React, {ReactEventHandler, useState} from 'react'
+import React, { useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Inputs from '../components/Form/Inputs'
 import google from "../assets/google.png"
 import apple from "../assets/apple.png"
 import axios from 'axios'
 export default function SignUp() {
-  const [isLogin, setIsLogin]=useState()
+
     const [data, setData]=useState({
         firstName:"",
         lastName:"",

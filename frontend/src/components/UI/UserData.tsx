@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import { MdFilterAlt } from "react-icons/md";
 import { useNavigate } from "react-router-dom";

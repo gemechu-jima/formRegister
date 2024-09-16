@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useGlobalContext } from '../../context/Context'
 export default function Language() {
     const {language, setLanguage}=useGlobalContext()

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDashboard, MdTask } from "react-icons/md";
 import { FcStatistics } from "react-icons/fc";
@@ -10,35 +10,35 @@ import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import Logo from "../UI/Logo";
 import ThemeMode from "../UI/ThemeMode";
 import { useGlobalContext } from "../../context/Context";
-const menuTranslations:any = {
-  EN: {
-    links: [
-      { label: "DashBoard", subItems: ["Submenu 1", "Submenu 2", "Submenu 3"] },
-      { label: "Task", subItems: ["User Data", "Create new user", "View user detail"] },
-      { label: "List Task" },
-      { label: "Statistics" },
-      { label: "Project" },
-    ],
-  },
-  AM: {
-    links: [
-      { label: "መቆጣጠሪያ ሰሌዳ", subItems: ["ንዑስ ምናሌ 1", "ንዑስ ምናሌ 2", "ንዑስ ምናሌ 3"] },
-      { label: "ተግባር", subItems: ["የተጠቃሚ መረጃ", "አዲስ ተጠቃሚ ፍጠር", "የተጠቃሚ ዝርዝር እይታ"] },
-      { label: "የተግባር ዝርዝር" },
-      { label: "ስታትስቲክስ" },
-      { label: "ፕሮጀክት" },
-    ],
-  },
-  AO: {
-    links: [
-      { label: "Gabate" },
-      { label: "Shaakala" },
-      { label: "Hojii Tarree" },
-      { label: "Statistiiksii" },
-      { label: "Proojektii" },
-    ],
-  },
-};
+// const menuTranslations:any = {
+//   EN: {
+//     links: [
+//       { label: "DashBoard", subItems: ["Submenu 1", "Submenu 2", "Submenu 3"] },
+//       { label: "Task", subItems: ["User Data", "Create new user", "View user detail"] },
+//       { label: "List Task" },
+//       { label: "Statistics" },
+//       { label: "Project" },
+//     ],
+//   },
+//   AM: {
+//     links: [
+//       { label: "መቆጣጠሪያ ሰሌዳ", subItems: ["ንዑስ ምናሌ 1", "ንዑስ ምናሌ 2", "ንዑስ ምናሌ 3"] },
+//       { label: "ተግባር", subItems: ["የተጠቃሚ መረጃ", "አዲስ ተጠቃሚ ፍጠር", "የተጠቃሚ ዝርዝር እይታ"] },
+//       { label: "የተግባር ዝርዝር" },
+//       { label: "ስታትስቲክስ" },
+//       { label: "ፕሮጀክት" },
+//     ],
+//   },
+//   AO: {
+//     links: [
+//       { label: "Gabate" },
+//       { label: "Shaakala" },
+//       { label: "Hojii Tarree" },
+//       { label: "Statistiiksii" },
+//       { label: "Proojektii" },
+//     ],
+//   },
+// };
 const links = [
   {
     id:1,
@@ -109,8 +109,8 @@ const secondLinks = [
 ];
 export default function Sideboard() {
   const [multipleSelect, setMultipleSelect]=useState<number[]>([])
-  const {openIcon, query, language}=useGlobalContext()
-  const menuData = menuTranslations[language];
+  const {openIcon, query}=useGlobalContext()
+
   const handleClick = (id:number) => {
     let cypSelectElement:number[]=[...multipleSelect]
 

@@ -1,14 +1,11 @@
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Inputs from "../components/Form/Inputs";
 import RadioButton from "../components/Form/RadioButton";
-import Member from "../components/Form/Member";
+
 import { useGlobalContext } from "../context/Context";
 
-interface Member {
-  son?: number |"" ;
-  daughter?: number |"";
-};
+
 export type personInfo = {
   
   fname: string;
