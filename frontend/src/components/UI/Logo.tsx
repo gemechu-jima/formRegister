@@ -4,9 +4,8 @@ import { useGlobalContext } from '../../context/Context';
 export default function Logo() {
   const {openIcon}=useGlobalContext()
   return (
-    <div className='flex items-center gap-2 text-3xl'>
+    <div className='flex items-center gap-2 text-3xl mb-8'>
         <IoLogoWebComponent className='text-green-600 '/>
-        
         {openIcon && <h1 >REG</h1>}
     </div>
   )

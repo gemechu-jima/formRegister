@@ -8,10 +8,9 @@ export default function Backdrop({children, setShow}:props) {
     ev.stopPropagation()
   }
   return (
-    <div className='fixed bg-black bg-opacity-20 h-full w-full inset-0 '  onClick={()=>setShow(false)}>
+    <div className='fixed bg-black bg-opacity-20 h-full w-full inset-0 z-30 '  onClick={()=>setShow(false)}>
       <div className='bg-white w-44 h-full  ' onClick={handlePropagation}>
-      {children}
-
+        {children}
       </div>
     </div>
   )

@@ -28,18 +28,18 @@ const linkTranslations:any = {
     dashboard: "Gabate",
   },
 };
-
+let classname="mouse-over:bg-slate-300 rounded-md"
 export default function NavLinks() {
   const {language}=useGlobalContext()
   const labels=linkTranslations[language]
   return (
-    <div className='flex sm:flex-row flex-col w-20 sm:w-auto sm:gap-2 md:gap-5'>
-        <Link to={"/home"}>{labels.home}</Link>
-        <Link to={"/about"}>{labels.about}</Link>
-        <Link to={"/contact"}>{labels.contact}</Link>
-        <Link to={"/service"}>{labels.service}</Link>
-        <Link to={"/demo"}>{labels.register}</Link>
-        <Link to={"/dashboard"}>{labels.dashboard}</Link>
+    <div className='flex sm:flex-row flex-col w-20 sm:w-auto sm:gap-2 md:gap-5 gap-5 absolute sm:relative my-6 left-3 '>
+        <Link className={classname} to={"/home"}>{labels.home}</Link>
+        <Link className={classname} to={"/about"}>{labels.about}</Link>
+        <Link className={classname} to={"/contact"}>{labels.contact}</Link>
+        <Link className={classname} to={"/service"}>{labels.service}</Link>
+        <Link className={classname} to={"/demo"}>{labels.register}</Link>
+        <Link className={classname} to={"/dashboard"}>{labels.dashboard}</Link>
     </div>
   )
 }
