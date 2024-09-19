@@ -57,11 +57,12 @@ const login=async(req, res)=>{
                    return res.status(401).json({msg:"Invalid email and password", error:true, success:false})
                 }
                 const user=data[0]
+            
                 let hashPassword=await bcrypt.compare(password, user.password)
                 if(hashPassword){
-                    token=jwt.sign({userI:user.id, email:user.email}, "12345", {expiresIn:"1d"})
+                    token=jwt.sign({userI:user.id, email:user.email}, "123451", {expiresIn:"1d"})
                      return res.status(202).json({msg:"successfully login", 
-                         error:false, success:true, data:token, userI:data.id, email:data.email})
+                         error:false, success:true, data:token, userI:user.id, email:user.email})
                 }else{
                     return res.status(401).json({msg:"Your Password is incorrect", error:true, success:false})
                 }

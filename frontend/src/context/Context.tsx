@@ -13,7 +13,11 @@ function GlobalContextProvider({ children }:{ children: ReactNode }): JSX.Elemen
   const [theme, setTheme]=useState<boolean>(false)
   const [openIcon, setOpenIcon]=useState(true)
   const [query, setQuery] =useState("");
-  
+  const [token, setToken]=useState<string>()
+  const login=()=>{}
+  const logout=(data:any, tokenValue:string)=>{
+      setToken(tokenValue)
+  }
   const handleClick=()=>{
   setTheme(!theme)
   
@@ -26,7 +30,14 @@ function GlobalContextProvider({ children }:{ children: ReactNode }): JSX.Elemen
     }
   })
     return (
-        <GlobalContext.Provider value={{handleClick, theme, openIcon, setOpenIcon, query, setQuery,  language, setLanguage}}  >
+        <GlobalContext.Provider value={{
+          handleClick,
+          login, logout,
+          token,
+         theme, openIcon, 
+         setOpenIcon, query,
+          setQuery,  
+          language, setLanguage}}  >
             {children}
         </GlobalContext.Provider>
     );

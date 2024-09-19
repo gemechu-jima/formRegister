@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import Inputs from '../components/Form/Inputs'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import google from "../assets/google.png"
 import apple from "../assets/apple.png"
 import axios from 'axios'
+import { useGlobalContext } from '../context/Context'
 export default function Login() {
     
     const [data, setData]=useState({
         email:"",
         password:""
     })
+    const {login}=useGlobalContext()
+    const navigate=useNavigate()
     const handleOnChange=(ev:React.ChangeEvent<HTMLInputElement>)=>{
       const {name, value}=ev.target
 
@@ -23,13 +26,22 @@ export default function Login() {
     }
     const authHandler=async(ev:React.ChangeEvent<HTMLFormElement>)=>{
       ev.preventDefault()
-      console.log(data)
+      
       try {
-        const response=await axios.post("/api/auth/login")
-        if(response){}
+        const response=await axios.post("/api/auth/login", data)
+        console.log("response",response.data)
+        if(response.data.success){
+          alert(response.data.msg)
+          login(response.data.email, response.data.data)
+          navigate("/dashboard")
+        }else if(response.data.error){
+          alert(response.data.msg)
+          navigate("/")
+        }
       } catch (error) {
+        console.error(error)
         if(error instanceof Error){
-          throw new Error("Error during  login ")
+          throw new Error("Error during login")
         }
       }
     }
