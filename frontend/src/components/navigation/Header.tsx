@@ -26,7 +26,7 @@ export default function Header() {
         {show && (
           <Backdrop setShow={setShow}>
                 <Logo />
-                <NavLinks />
+                <NavLinks setShow={setShow}/>
               <div className="absolute bottom-10 flex gap-6 flex-col left-3">
                 <Link to={"/login"}>login</Link>
                 <Link to="/">Setting</Link>

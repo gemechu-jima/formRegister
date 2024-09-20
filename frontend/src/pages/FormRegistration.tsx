@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Inputs from "../components/Form/Inputs";
 import RadioButton from "../components/Form/RadioButton";
@@ -77,7 +78,7 @@ export default function FormRegistration() {
       member:"Maatii"
     }
   };
-
+const navigate=useNavigate()
   const handleOnChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = ev.target;
     console.log( name, value)
@@ -90,6 +91,9 @@ export default function FormRegistration() {
   ): Promise<void> => {
     ev.preventDefault();
     const response = await axios.post("/api/users/register", data);
+    if(response.status===201){
+         navigate("/dashboard")
+    }
     console.log(data, "response", response);
   };
   return (

@@ -1,5 +1,4 @@
-import { createContext, useContext, ReactNode, useState,useEffect } from "react";
-
+import { createContext, useContext, ReactNode, useState,useEffect, useLayoutEffect, useCallback } from "react";
 
 const GlobalContext = createContext<any>(null);
 // interface ThemeMode{
@@ -14,21 +13,46 @@ function GlobalContextProvider({ children }:{ children: ReactNode }): JSX.Elemen
   const [openIcon, setOpenIcon]=useState(true)
   const [query, setQuery] =useState("");
   const [token, setToken]=useState<string>()
-  const login=()=>{}
-  const logout=(data:any, tokenValue:string)=>{
-      setToken(tokenValue)
+ 
+ 
+  const login=useCallback((email:string, tokenValue:string)=>{
+    setToken(tokenValue)
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({
+        token:tokenValue,
+        email
+      }))
+      console.log("token, email", tokenValue, email)
+  }, [])
+
+  const logout=()=>{
+    setToken("")
+    localStorage.removeItem("userData")
+   
+    
   }
   const handleClick=()=>{
   setTheme(!theme)
-  
   }
+
+  useLayoutEffect(()=>{
+    const userData = localStorage.getItem("userData") || "";
+    if (userData) {
+      const userDataParse = JSON.parse(userData);
+      login(userDataParse.email, userDataParse.token);
+    } else {
+      return;
+    }
+  },[login])
   useEffect(()=>{
     if(theme){
       document.documentElement.classList.add("dark");
     }else{
       document.documentElement.classList.remove("dark");
     }
-  })
+  }, [theme])
+
     return (
         <GlobalContext.Provider value={{
           handleClick,

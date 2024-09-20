@@ -3,6 +3,7 @@ import { BiSort } from "react-icons/bi";
 import { MdFilterAlt } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useGlobalContext } from "../../context/Context";
 interface PersonInfo {
   id: number;
   fname: string;
@@ -17,6 +18,7 @@ interface PersonInfo {
 export default function UserData() {
   const [data, setData] = useState<PersonInfo[] | null>();
   const [sortBy, setSortBy]=useState("")
+  const {token}=useGlobalContext()
  const navigate=useNavigate()
   const handleSort=(ev:React.ChangeEvent<HTMLSelectElement>)=>{
     const {value}=ev.target
@@ -36,9 +38,15 @@ export default function UserData() {
   });
   const fetchData = async () => {
     try {
-      const response = await axios.get("/api/users");
+      const response = await axios({
+        method:"GET",
+        url:"/api/users",
+        headers:{
+          Authorization:`Bearer ${token}`,
+          "Content-Type":"application/json"
+        }
+      });
       const results = response.data;
-     
       if (
         Array.isArray(results.data) &&
         results.data.every((item: any) => item)
@@ -51,9 +59,11 @@ export default function UserData() {
       alert(error);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
+  
   const handleUpdate=(id:any)=>{
       navigate(`/demo/${id}`)
   }

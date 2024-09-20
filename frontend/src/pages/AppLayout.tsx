@@ -1,6 +1,7 @@
 
 import { Outlet } from 'react-router-dom'
 import Header from '../components/navigation/Header'
+import Footer from '../components/navigation/Footer'
 export default function AppLayout() {
   return (
     <div className={`
@@ -10,6 +11,7 @@ export default function AppLayout() {
       <div className='dark:bg-black bg-slate-200 bg-opacity-60 w-full text-black dark:text-white h-screen pt-1'>
       <Outlet/>
       </div>
+      <Footer/>
     </div>
   )
 }

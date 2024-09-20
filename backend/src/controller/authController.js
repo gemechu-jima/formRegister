@@ -46,7 +46,8 @@ const signUp=async(req, res)=>{
 
 const login=async(req, res)=>{
     const {email, password}=req.body
-  
+    let secret=process.env.JWT_SECRET
+    
     let token
     try {
          connection.query("SELECT id, email, password FROM auth WHERE  email=?", [email], 
@@ -60,7 +61,7 @@ const login=async(req, res)=>{
             
                 let hashPassword=await bcrypt.compare(password, user.password)
                 if(hashPassword){
-                    token=jwt.sign({userI:user.id, email:user.email}, "123451", {expiresIn:"1d"})
+                    token=jwt.sign({userI:user.id, email:user.email}, secret, {expiresIn:"1d"})
                      return res.status(202).json({msg:"successfully login", 
                          error:false, success:true, data:token, userI:user.id, email:user.email})
                 }else{

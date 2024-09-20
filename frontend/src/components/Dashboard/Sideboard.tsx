@@ -132,7 +132,7 @@ export default function Sideboard() {
         </div>
         <ul>
           {links.filter((menu)=>menu.label.toLowerCase().includes(query)).map((link, index) => (
-            <>
+            <div key={index + link.id}>
               <li key={index + link.id}>
                 <Link
                   to={`${link.link === "dashboard" ? "/dashboard" : link.link}`}
@@ -161,7 +161,7 @@ export default function Sideboard() {
                   ))}
                 </ul>
               )}
-            </>
+            </div>
           ))}
         </ul>
         <div>

@@ -1,7 +1,9 @@
 
 import { Link } from 'react-router-dom'
 import { useGlobalContext } from '../../context/Context';
-
+type props ={
+  setShow:React.Dispatch<React.SetStateAction<boolean>>
+}
 const linkTranslations:any = {
   EN: {
     home: "Home",
@@ -29,17 +31,17 @@ const linkTranslations:any = {
   },
 };
 let classname="mouse-over:bg-slate-300 rounded-md"
-export default function NavLinks() {
+export default function NavLinks({setShow}:props) {
   const {language}=useGlobalContext()
   const labels=linkTranslations[language]
   return (
     <div className='flex sm:flex-row flex-col w-20 sm:w-auto sm:gap-2 md:gap-5 gap-5 absolute sm:relative my-6 left-3 '>
-        <Link className={classname} to={"/home"}>{labels.home}</Link>
-        <Link className={classname} to={"/about"}>{labels.about}</Link>
-        <Link className={classname} to={"/contact"}>{labels.contact}</Link>
-        <Link className={classname} to={"/service"}>{labels.service}</Link>
-        <Link className={classname} to={"/demo"}>{labels.register}</Link>
-        <Link className={classname} to={"/dashboard"}>{labels.dashboard}</Link>
+        <Link className={classname} to={"/home"} onClick={()=>setShow(false)}>{labels.home}</Link>
+        <Link className={classname} to={"/about"} onClick={()=>setShow(false)}>{labels.about}</Link>
+        <Link className={classname} to={"/contact"} onClick={()=>setShow(false)}>{labels.contact}</Link>
+        <Link className={classname} to={"/service"} onClick={()=>setShow(false)}>{labels.service}</Link>
+        <Link className={classname} to={"/demo"} onClick={()=>setShow(false)}>{labels.register}</Link>
+        <Link className={classname} to={"/dashboard"} onClick={()=>setShow(false)}>{labels.dashboard}</Link>
     </div>
   )
 }

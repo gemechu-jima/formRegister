@@ -8,7 +8,9 @@ export default function Landing() {
         <div className='h-96 w-[80%] mx-auto dark:text-white'>
           <h1 className='text-5xl  pb-5'>Where you Work</h1>
             <h2 className='font-bold text-2xl '>
-            Generate dummy text for web design with this handy tool. Choose from different options,
+            Generate dummy text for web design with this handy tool.
+            </h2>
+            <h2 className='sm:block hidden'>Choose from different options,
             such as Cicero, Kafka, pangram, or number, and customize the number of words, characters,
             </h2>
         </div>

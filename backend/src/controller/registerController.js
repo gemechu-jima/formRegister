@@ -33,6 +33,7 @@ const registerForm = (req, res) => {
   );
 };
 const getUsers = (req, res) => {
+ 
   connection.query("SELECT * FROM users", (error, data, fields) => {
     if (error) {
       console.error("Error fetching users:", error);
