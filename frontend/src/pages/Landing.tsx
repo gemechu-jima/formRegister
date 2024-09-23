@@ -10,7 +10,7 @@ export default function Landing() {
             <h2 className='font-bold text-2xl '>
             Generate dummy text for web design with this handy tool.
             </h2>
-            <h2 className='sm:block hidden'>Choose from different options,
+            <h2 className='sm:block hidden text-3xl'>Choose from different options,
             such as Cicero, Kafka, pangram, or number, and customize the number of words, characters,
             </h2>
         </div>

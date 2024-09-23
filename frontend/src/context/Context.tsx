@@ -13,7 +13,8 @@ function GlobalContextProvider({ children }:{ children: ReactNode }): JSX.Elemen
   const [openIcon, setOpenIcon]=useState(true)
   const [query, setQuery] =useState("");
   const [token, setToken]=useState<string>()
- 
+  const [show, setShow] = useState<boolean>(false);
+  
  
   const login=useCallback((email:string, tokenValue:string)=>{
     setToken(tokenValue)
@@ -61,7 +62,8 @@ function GlobalContextProvider({ children }:{ children: ReactNode }): JSX.Elemen
          theme, openIcon, 
          setOpenIcon, query,
           setQuery,  
-          language, setLanguage}}  >
+          language, setLanguage,
+          show, setShow}}  >
             {children}
         </GlobalContext.Provider>
     );

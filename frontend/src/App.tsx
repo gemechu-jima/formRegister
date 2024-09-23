@@ -5,7 +5,7 @@ import AppLayout from './pages/AppLayout';
 import Dashboard from './pages/Dashboard';
 import FormRegistration from './pages/FormRegistration';
 import Protective from './components/Protective';
-
+import NotFound from './pages/NotFound';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,16 +26,20 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <Protective>
-        <Routes>
-          <Route path='/' element={<Dashboard />}>
-            <Route path="" element={<MainDashboard />} />
-            <Route path="task" element={<Task />} />
-            <Route path="project" element={<Project />} />
-            <Route path="statistic" element={<Statistic />} />
-          </Route>
-        </Routes>
+        <Dashboard />
       </Protective>
-    )
+    ),
+    children: [
+      { index: true, element: <MainDashboard /> },
+      { path: "task", element: <Task /> }, 
+      { path: "project", element: <Project /> }, 
+      { path: "statistic", element: <Statistic /> }, 
+    ],
+  },
+  
+  {
+   path:"*",
+   element:<NotFound/>
   }
 ]);
 

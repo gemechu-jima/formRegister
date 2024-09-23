@@ -14,7 +14,7 @@ export default function Header() {
     <div className="bg-white">
       <div className="w-full sm:flex hidden sm:flex-row justify-between px-8 h-16 items-center">
         <Logo />
-        <NavLinks />
+        <NavLinks setShow={setShow}/>
         <div className="flex gap-3 text-sm">
           <Link to="/login">Login</Link>
           <Link to="/signup">SignUp</Link>
