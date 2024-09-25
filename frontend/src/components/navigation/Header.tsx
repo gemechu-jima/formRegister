@@ -1,14 +1,15 @@
-import { useState } from "react";
+
 import Logo from "../UI/Logo";
 import NavLinks from "./NavLinks";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { ImCross } from "react-icons/im";
+
 import Backdrop from "../UI/Backdrop";
 import { Link } from "react-router-dom";
 import Language from "./Language";
+import { useGlobalContext } from "../../context/Context";
 export default function Header() {
-  const [show, setShow] = useState<boolean>(false);
+  const{ show, setShow}= useGlobalContext();
 
   return (
     <div className="bg-white">
@@ -22,12 +23,12 @@ export default function Header() {
         </div>
       </div>
       <div className="w-full sm:hidden flex justify-between items-center px-8 h-16 ">
-        <Logo />
+      <Logo />
         {show && (
           <Backdrop setShow={setShow}>
                 <Logo />
                 <NavLinks setShow={setShow}/>
-              <div className="absolute bottom-10 flex gap-6 flex-col left-3">
+                <div className="absolute bottom-10 flex gap-6 flex-col left-3">
                 <Link to={"/login"}>login</Link>
                 <Link to="/">Setting</Link>
                 <Language />
@@ -35,12 +36,7 @@ export default function Header() {
           </Backdrop>
         )}
         <span>
-          {show && (
-            <ImCross
-              className="cursor-pointer text-red-500"
-              onClick={() => setShow(false)}
-            />
-          )}
+         
           {!show && (
             <GiHamburgerMenu
               className="cursor-pointer"

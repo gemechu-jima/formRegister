@@ -1,8 +1,9 @@
-import { connection } from "../config/mysqlDB.js";
-
-const registerForm = (req, res) => {
+// import { connection } from "../config/mysqlDB.js";
+import registerModel  from "../model/registerModel.js"
+const registerForm = async(req, res) => {
   const { fname, lname, phone, city, woreda, age, gender, daughter, son } = req.body;
   let totalMember
+  let data
   if(son && daughter){
      totalMember=Number(daughter)+ Number(son)
   }else if(son){
@@ -13,52 +14,77 @@ const registerForm = (req, res) => {
     totalMember=0
   }
   console.log(fname, lname, phone, city, woreda, age, gender, totalMember);
-  const values = [fname, lname, phone, city, woreda, age, gender, totalMember];
-  connection.query(
-    "INSERT INTO users (fname, lname, phone, city, woreda, age, gender, member) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-    values,
-    function (err, data, fields) {
-      if (err) {
-        console.error("Error:", err);
+  // const values = [fname, lname, phone, city, woreda, age, gender, totalMember];
+      try {
+        data=await registerModel.create({
+          fname, lname, phone, city, woreda, age, gender, totalMember
+        })
+        if (!data) {
+          console.error("Error:");
+          return res.status(500).json({
+            status: "error",
+            message: "An error occurred while creating the user.",
+          });
+        }else{
+          res.status(201).json({
+            status: "success",
+            message: "User created successfully!",
+          });
+        }
+      } catch (error) {
         return res.status(500).json({
           status: "error",
-          message: "An error occurred while creating the user.",
+          message: `An error occurred while creating the user. ${error}`,
         });
       }
-      res.status(201).json({
-        status: "success",
-        message: "User created successfully!",
-      });
+
+     
     }
-  );
-};
-const getUsers = (req, res) => {
  
-  connection.query("SELECT * FROM users", (error, data, fields) => {
-    if (error) {
-      console.error("Error fetching users:", error);
+
+const getUsers = async(req, res) => {
+ 
+    let data=await registerModel.find({})
+    if (!data) {
+      console.error("Error fetching users:");
       return res.status(500).send("Internal Server Error");
     } else {
       res.json({data});
     }
-  });
+
 };
-const getUserById=(req, res)=>{
+const getUserById=async(req, res)=>{
   const {id}=req.params
-  connection.query("SELECT * FROM USERS WHERE id=?", [id], (err, results)=>{
-    if(err) throw Error(err)
-    console.log(results)
-  return res.status(201).json({results})
-  })
+    let data=await registerModel.findOne({id})
+    if(!data) throw Error(err)
+    console.log(data)
+   return res.status(201).json({data})
+  
 }
-const deleteUserById=(req, res)=>{
+const deleteUserById=async(req, res)=>{
   const {id}=req.params
-  connection.query("DELETE FROM users WHERE id=?", [id], (err, result)=>{
-    if (err) throw err;
-    console.log("Number of records deleted: " + result.affectedRows);
+  try {
+    let data=await registerModel.findByIdAndDelete({_id:id})
+ if(data){
+  res.status(201).json({
+      msg:"data is deleted",
+      error:false,
+      success:true
   })
-  return res.status(201).json({msg:" Deleted user data"})
+  } }catch (error) {
+    console.log(error.message)
+    res.status(401).json({
+        msg:error.message,
+        error:true,
+        success:false
+    })
+  }
+ 
 }
+
+
+
+
 const updateUserById=(req, res)=>{
  const {id, fname, lname,  phone, age, city, woreda, member, gender}=req.body
 const updateData={fname, lname,  phone, age, city, woreda, member, gender}

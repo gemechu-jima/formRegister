@@ -109,7 +109,8 @@ const secondLinks = [
 ];
 export default function Sideboard() {
   const [multipleSelect, setMultipleSelect]=useState<number[]>([])
-  const {openIcon, query}=useGlobalContext()
+ const {openIcon, query, setShow}=useGlobalContext()
+
 
   const handleClick = (id:number) => {
     let cypSelectElement:number[]=[...multipleSelect]
@@ -126,15 +127,17 @@ export default function Sideboard() {
   };
   return (
     <div className="h-full  mt-2 rounded-e-lg relative">
+      
       <div className="h-full flex flex-col justify-center gap-5 pl-2 py-5 ">
         <div className="absolute top-2 flex items-start ">
-          <Logo  />
+          <Logo  />   
         </div>
         <ul>
           {links.filter((menu)=>menu.label.toLowerCase().includes(query)).map((link, index) => (
             <div key={index + link.id}>
               <li key={index + link.id}>
                 <Link
+                  onClick={()=>setShow(false)}
                   to={`${link.link === "dashboard" ? "/dashboard" : link.link}`}
                   className={`py-1  ${openIcon ? "text-lg" : "text-3xl"}  hover:bg-slate-70
                hover:text-white rounded-xl my-2 pl-2 pr-1 flex items-center gap-1`}
@@ -156,7 +159,7 @@ export default function Sideboard() {
                 <ul className=" mx-auto ml-8">
                   {link.SubmenuItems.map((submenu) => (
                     <li>
-                      <Link to={submenu?.title}>{submenu.title}</Link>
+                      <Link to={submenu?.title} >{submenu.title}</Link>
                     </li>
                   ))}
                 </ul>

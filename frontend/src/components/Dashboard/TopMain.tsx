@@ -7,10 +7,10 @@ import { useGlobalContext } from '../../context/Context';
 export default function TopMain() {
     const [open, setOpen]=useState<boolean>()
     const [openLogout, setOpenLogout]=useState<boolean>()
-    const {query, setQuery, logout, setShow}=useGlobalContext()
+    const {query, setQuery, logout, setOpenIcon, setShow}=useGlobalContext()
   return (
     <div className='flex items-center justify-between gap-2 mt-3  '>
-   <div className=''><VscThreeBars className='sm:hidden' onClick={()=>setShow(true)}/><h1 className='hidden sm:flex'>Manage Your  project</h1></div>
+   <div className=''><VscThreeBars className='sm:hidden' onClick={()=>{setOpenIcon(true), setShow(true)}}/><h1 className='hidden sm:flex'>Manage Your  project</h1></div>
     <div className='flex items-center gap-3 mx-2'>
       <span className='bg-white flex items-center rounded-lg p-2'> 
       <CiSearch onClick={()=>setOpen(!open)}/>

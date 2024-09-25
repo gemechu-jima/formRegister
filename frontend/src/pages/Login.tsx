@@ -26,13 +26,13 @@ export default function Login() {
     }
     const authHandler=async(ev:React.ChangeEvent<HTMLFormElement>)=>{
       ev.preventDefault()
-      
+      console.log(data)
       try {
         const response=await axios.post("/api/auth/login", data)
         console.log("response",response.data)
         if(response.data.success){
           alert(response.data.msg)
-          login(response.data.email, response.data.data)
+          login(response.data.email, response.data.token)
           navigate("/dashboard")
         }else if(response.data.error){
           alert(response.data.msg)

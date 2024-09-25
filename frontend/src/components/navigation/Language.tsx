@@ -2,7 +2,6 @@
 import { useGlobalContext } from '../../context/Context'
 export default function Language() {
     const {language, setLanguage}=useGlobalContext()
-    console.log(language)
   return (
     <div className='px-2 py-1 rounded cursor-pointer outline-none animate-bounce hover:animate-none bg-blue-300  '>
     <select value={language} onChange={(ev)=>setLanguage(ev.target.value)}

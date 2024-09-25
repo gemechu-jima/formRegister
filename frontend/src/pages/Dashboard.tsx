@@ -1,15 +1,15 @@
 
 import { IoIosArrowDropleftCircle,IoIosArrowDroprightCircle } from "react-icons/io";
 import { Outlet } from 'react-router-dom'
-import { RxCross2 } from "react-icons/rx";
+
 
 import Sideboard from '../components/Dashboard/Sideboard'
 import TopMain from '../components/Dashboard/TopMain'
 import { useGlobalContext } from '../context/Context';
-
+import Cross from "../components/UI/Cross";
 
 export default function Dashboard() {
- const {openIcon, setOpenIcon, show, setShow}=useGlobalContext()
+ const {openIcon, setOpenIcon, show}=useGlobalContext()
 
 
   return (
@@ -27,9 +27,8 @@ export default function Dashboard() {
         </span>
         <Sideboard />
         </div>
-        <div className={`${show ? "flex absolute" : "hidden relative"}  top-0 left-0 h-full bg-white`}>
-          <RxCross2 className="absolute z-10 right-1 top-5 bg-slate-300  text-red-500 text-2xl rounded-full p-1 "
-           onClick={()=>setShow(false)}/>
+        <div className={`${show ? "flex absolute" : "hidden relative"} sm:hidden top-0 left-0 h-full bg-slate-200`}>
+          <Cross/>
           <Sideboard/>
         </div>
         <div className={`${  openIcon ? "w-[84%]" :"w-[94%]"}

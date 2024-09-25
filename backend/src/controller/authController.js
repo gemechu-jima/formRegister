@@ -1,7 +1,7 @@
 
-import { connection } from "../config/mysqlDB.js"
+import userConnect from "../model/authModel.js"
 import jwt from "jsonwebtoken"
-import bcrypt from "bcryptjs"
+import bcryptjs from "bcryptjs"
 
 
 function combineName(fname, lname){
@@ -12,34 +12,23 @@ function combineName(fname, lname){
 }
 const signUp=async(req, res)=>{
     const {email, password, firstName, lastName}=req.body
-    const hashPassword=await bcrypt.hash(password, 10)
+    const hashPassword=await bcryptjs.hash(password, 10)
     console.log(hashPassword)
+    let user
    let userName= combineName( firstName, lastName)
     try {
-       connection.query("SELECT username, email FROM auth WHERE email=?", [email], (error, data, fields) => {
-        if (error) {
-          console.error(error); // Log the actual error for debugging
-          return res.status(500).json({ msg: error, error: true, success: false });
-        } else if (data.length > 0) {
-          return res.status(400).json({ msg: "Already exist, you cannot sign up again", error: true, success: false });
+         user=await userConnect.findOne({email})
+        if(user){
+            return res.status(402).json({msg:"This user already exist"})
         }
-          else{
-            connection.query("INSERT INTO auth (email, password, username) VALUES (  ?, ?, ?)", [email, hashPassword, userName],
-                (error, data, fields)=>{
-                    if(error){ 
-                        console.error(error)
-                        return res.status(500).json({msg:error, error:true, success:false})
-                    }else{
-                        return res.status(200).json({msg:"Successfully sign up",  error:false, success:true})
-                    }
-    
-                       
-                }
-            )
-        }
-    })
-    }catch (error) {
-        return res.status(500).json({msg:"Internal server error",error})  
+        let hashPassword
+            hashPassword=await bcryptjs.hash(password, 10)
+            user=await userConnect.create({email, password:hashPassword, username:userName})
+            // token=jwt.sign({userId:user.id, email:user.email}, process.env.JWT_SECRET, {expiresIn:"1d"})
+        res.status(201).json({msg:"Successfully sign up",  error:false, success:true})
+    } catch (error) {
+        console.log(error.message)
+        return res.status(402).json({msg:error.message})
     }
 }
 
@@ -47,30 +36,27 @@ const signUp=async(req, res)=>{
 const login=async(req, res)=>{
     const {email, password}=req.body
     let secret=process.env.JWT_SECRET
-    
+    console.log(email, password)
+    let user
     let token
     try {
-         connection.query("SELECT id, email, password FROM auth WHERE  email=?", [email], 
-            async(error, data, fields)=>{
-                if(error){
-                    return res.status(500).json({msg:"Internal server error", error:true, success:false})
-                }else if(data.length===0){
-                   return res.status(401).json({msg:"Invalid email and password", error:true, success:false})
-                }
-                const user=data[0]
-            
-                let hashPassword=await bcrypt.compare(password, user.password)
-                if(hashPassword){
-                    token=jwt.sign({userI:user.id, email:user.email}, secret, {expiresIn:"1d"})
-                     return res.status(202).json({msg:"successfully login", 
-                         error:false, success:true, data:token, userI:user.id, email:user.email})
-                }else{
-                    return res.status(401).json({msg:"Your Password is incorrect", error:true, success:false})
-                }
-            })
+        user=await userConnect.findOne({email})
+        if(!user){
+          return res.status(404).json({msg:"Fail into login ",  error:true, success:false})
+        }
+        let isValid=await bcryptjs.compare(password, user.password)
+        if(isValid){
+            token=jwt.sign({userId:user.id, email:user.email},  secret, {expiresIn:'1d'})
+                return res.status(200).json({msg:"Successfully login", 
+                     error:false, success:true,
+                      userId:user.id, email:user.email, token})
+        }else{
+        return res.status(404).json({msg:"Login is failed Not found credential password", error:true, success:false })
+        }
     } catch (error) {
-       return  res.status(500).json({msg:"Internal server error",error})
+        return res.status(404).json({msg:"Login is failed Not found credential email.",error:true, success:false})
     }
+    
 }
 
 export {signUp, login}
