@@ -6,7 +6,6 @@ import morgan from "morgan"
 import registerFormRoutes from "./src/routes/registerFormRoutes.js";
 import authRoutes from "./src/routes/authRoutes.js"
 import { connect } from "./src/config/mongoDB.js";
-// import { connection } from "./src/config/mysqlDB.js";
 dotenv.config()
 
 

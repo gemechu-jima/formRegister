@@ -6,7 +6,7 @@ const router=Router()
 router.post("/register", registerForm)
 router.get("/",authenticate, getUsers)
 router.get("/:id", getUserById)
-router.put("/update", updateUserById)
+router.put("/update/:id", updateUserById)
 router.delete("/:id", deleteUserById)
 
 

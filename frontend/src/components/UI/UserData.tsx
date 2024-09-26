@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useGlobalContext } from "../../context/Context";
 interface PersonInfo {
-  id: number;
-  fname: string;
+  _id: number| number;
+  fname: string ;
   lname: string;
   phone: number | "";
   city?: string;
@@ -27,7 +27,7 @@ export default function UserData() {
   }
   const SortedData: PersonInfo[] | null |undefined = data?.sort((a, b) => {
     if (sortBy === "id") {
-      return b.id - a.id; // Descending order for ID
+      return b._id - a._id; // Descending order for ID
     } else if (sortBy === "fname") {
       return b.fname.localeCompare(a.fname); // Case-insensitive sorting for name
     } else if (sortBy === "age") {
@@ -69,7 +69,7 @@ export default function UserData() {
   }
   const handleDelete=async(id:number)=>{
     try {
-      const response=await axios.delete(`/api/user/${id}`)
+      const response=await axios.delete(`/api/users/${id}`)
       console.log((response))
       if(response.status===204){
         alert(response.data.msg);
@@ -120,7 +120,7 @@ export default function UserData() {
       {SortedData &&
        SortedData.map((user) => {
           return (
-            <tbody key={user.id}>
+            <tbody key={user._id}>
             <tr>
               <td className={TdStyle.TdStyle}>{user.fname}</td>
               <td className={TdStyle.TdStyle}>{user.lname}</td>
@@ -129,8 +129,8 @@ export default function UserData() {
               <td className={TdStyle.TdStyle}>{user.gender}</td>
               <td className={TdStyle.TdStyle}>{user.member}</td>
               <td className={TdStyle.TdStyle}>
-                <button className="text-green-500 px-1" onClick={()=>handleUpdate(user.id)}>Edit</button>
-                <button className="text-red-500 px-1" onClick={()=>handleDelete(user.id)}>Delete</button>
+                <button className="text-green-500 px-1" onClick={()=>handleUpdate(user._id)}>Edit</button>
+                <button className="text-red-500 px-1" onClick={()=>handleDelete(user._id)}>Delete</button>
               </td>
             </tr>
             </tbody>

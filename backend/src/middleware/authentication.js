@@ -5,7 +5,6 @@ let secret=process.env.JWT_SECRET
 const authenticate=async(req, res, next)=>{
      let token 
 
-     console.log("secret", secret)
      try {
         if(req.headers.authorization){
             token=await req.headers.authorization.split(" ")[1]

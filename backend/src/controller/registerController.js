@@ -23,12 +23,12 @@ const registerForm = async(req, res) => {
           console.error("Error:");
           return res.status(500).json({
             status: "error",
-            message: "An error occurred while creating the user.",
+            msg: "An error occurred while creating the user.",
           });
         }else{
           res.status(201).json({
             status: "success",
-            message: "User created successfully!",
+            msg: "User created successfully!",
           });
         }
       } catch (error) {
@@ -55,14 +55,16 @@ const getUsers = async(req, res) => {
 };
 const getUserById=async(req, res)=>{
   const {id}=req.params
-    let data=await registerModel.findOne({id})
-    if(!data) throw Error(err)
-    console.log(data)
+    let data=await registerModel.findOne({_id:id})
+    if(!data) {
+      return res.status(404).json({msg:"not found this Id "})
+    }
    return res.status(201).json({data})
   
 }
 const deleteUserById=async(req, res)=>{
   const {id}=req.params
+  console.log(" id",id)
   try {
     let data=await registerModel.findByIdAndDelete({_id:id})
  if(data){
@@ -83,30 +85,25 @@ const deleteUserById=async(req, res)=>{
 }
 
 
+ const updateUserById = async (req, res) => {
+  const { fname, lname, phone, age, city, woreda, member, gender } = req.body;
+  const {id}=req.params
+  const updateData = { fname, lname, phone, age, city, woreda, member, gender };
+  console.log("user ...", updateData, "id", id);
 
-
-const updateUserById=(req, res)=>{
- const {id, fname, lname,  phone, age, city, woreda, member, gender}=req.body
-const updateData={fname, lname,  phone, age, city, woreda, member, gender}
-console.log("user ...",updateData)
- try {
-  connection.query("UPDATE users SET ? WHERE id=?", [updateData, id], 
-    (error, results)=>{
-     if(error){
-      console.log("Error during update data ", error)
-      return res.status(500).json({msg :error, success:false, error:true})
-     }
-     if (results.affectedRows === 0) {
-      return res.status(404).json({ error: 'User not found' });
+  try {
+    const data = await registerModel.findByIdAndUpdate({ _id: id }, updateData, { new: true });
+    if (data) {
+      return res.status(200).json({ msg: "User is successfully updated", user: data });
+    } else {
+      return res.status(403).json({ msg: "Error occurred while updating user" });
     }
-     return res.status(200).json({ message: 'User updated successfully' })
-  })
- } catch (error) {
-  console.error('Error updating user:', error);
-  return res.status(500).json({   
-  error: 'Failed to update user' });
-}
- }
+  } catch (error) {
+    console.error('Error updating user:', error);
+    return res.status(500).json({ error: 'Failed to update user' });
+  }
+};
+
 
 export { registerForm, getUsers, getUserById, deleteUserById, updateUserById };
 

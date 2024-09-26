@@ -92,6 +92,7 @@ const navigate=useNavigate()
     ev.preventDefault();
     const response = await axios.post("/api/users/register", data);
     if(response.status===201){
+      alert(response.data.msg)
          navigate("/dashboard")
     }
     console.log(data, "response", response);

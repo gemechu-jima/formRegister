@@ -12,7 +12,7 @@ const defaultValue={
   woreda: "",
   age: "",
   gender: "",
- member: "",
+  member: "",
 }
 export default function UpdateUserData() {
   const [userData, setUserData] = useState(defaultValue);
@@ -21,11 +21,11 @@ export default function UpdateUserData() {
  const navigate=useNavigate()
 
   const fetchData = async () => {
-    const response = await axios.get(`/api/user/${id}`);
-    console.log("response", userData);
+    const response = await axios.get(`/api/users/${id}`);
+    console.log("response", response.data.data);
     try {
       if (response) {
-        const [users] = response.data.results;
+        const users = response.data.data;
         setUserData(users);
       } else {
         alert("Error happen check it");
@@ -46,7 +46,7 @@ export default function UpdateUserData() {
   const handleUpdate=(ev:React.ChangeEvent<HTMLFormElement>)=>{
     ev.preventDefault()
     try {
-      axios.put("/api/user/update", userData)
+      axios.put(`/api/users/update/${id}`, userData)
       .then(()=>{
        alert("Update success full ")
        setUserData(defaultValue)
@@ -68,7 +68,6 @@ export default function UpdateUserData() {
  console.log("user Data",userData)
   return (
     <div>
-    
         {userData ? (
       <form onSubmit={handleUpdate}
       className="text-center bg-slate-100 w-[50%] mx-auto py-2">
