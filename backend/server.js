@@ -8,6 +8,7 @@ import authRoutes from "./src/routes/authRoutes.js"
 import { connect } from "./src/config/mongoDB.js";
 dotenv.config()
 
+// nodemon --env-file .env server.js
 
 const app= express()
 const port=process.env.PORT
