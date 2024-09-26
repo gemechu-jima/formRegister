@@ -19,7 +19,9 @@ app.use(morgan("dev"))
 
 app.use("/api/users", registerFormRoutes)
 app.use("/api/auth", authRoutes)
-
+app.get("/", (req, res)=>{
+    res.status(200).json({msg:`Server is running on ${port}`})
+})
 app.listen(port, ()=>{
     console.log(`Server is running on ${port}`)
 })
