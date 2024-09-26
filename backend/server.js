@@ -9,13 +9,15 @@ import { connect } from "./src/config/mongoDB.js";
 dotenv.config()
 
 // nodemon --env-file .env server.js
-
+const allowedOrigins = ['https://formregister1.netlify.app'];
 const app= express()
 const port=process.env.PORT
 const ip=process.env.IP
 
 app.use(express.json())
-app.use(cors())
+app.use(cors(
+{origin: allowedOrigins}
+))
 app.use(morgan("dev"))
 
 app.use("/api/users", registerFormRoutes)
