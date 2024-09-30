@@ -2,7 +2,7 @@
 import { RxCross2 } from "react-icons/rx";
 import { useGlobalContext } from "../../context/Context";
 export default function Cross() {
-  const {setOpenIcon, setShow}=useGlobalContext()
+  const { setShow}=useGlobalContext()
 
   return (
    

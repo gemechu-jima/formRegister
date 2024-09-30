@@ -1,5 +1,4 @@
 
-import apple from "../assets/R.jpg"
 export default function HomePage() {
   return (
     <div className={`w-full h-full bg-white -mt-[2px]  bg-[url(./assets/R.jpg)] flex items-center justify-center`}>

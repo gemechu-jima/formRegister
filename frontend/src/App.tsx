@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 import { HomePage, AboutPage, ContactPage, ServicePage, Landing, UpdateUserData, Login, SignUp } from './pages';
 import { MainDashboard, Statistic, Task, Project } from './components/Dashboard';
 import AppLayout from './pages/AppLayout';
