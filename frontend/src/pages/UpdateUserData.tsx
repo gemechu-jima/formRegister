@@ -46,7 +46,7 @@ export default function UpdateUserData() {
   const handleUpdate=(ev:React.ChangeEvent<HTMLFormElement>)=>{
     ev.preventDefault()
     try {
-      axios.put(`/api/users/update/${id}`, userData)
+      axios.put(`https://formregister-yy1l.onrender.com/api/users/update/${id}`, userData)
       .then(()=>{
        alert("Update success full ")
        setUserData(defaultValue)

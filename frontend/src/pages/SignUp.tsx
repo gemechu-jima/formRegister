@@ -27,7 +27,7 @@ export default function SignUp() {
     const authHandler=async(ev:React.ChangeEvent<HTMLFormElement>)=>{
       ev.preventDefault()
       try {
-        const response=await axios.post("/api/auth/signup", data)
+        const response=await axios.post("https://formregister-yy1l.onrender.com/api/auth/signup", data)
         console.log(response)
 
         if(response.data.success){

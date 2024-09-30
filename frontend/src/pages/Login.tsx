@@ -28,7 +28,7 @@ export default function Login() {
       ev.preventDefault()
       console.log(data)
       try {
-        const response=await axios.post("/api/auth/login", data)
+        const response=await axios.post("https://formregister-yy1l.onrender.com/api/auth/login", data)
         console.log("response",response.data)
         if(response.data.success){
           alert(response.data.msg)

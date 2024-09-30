@@ -90,7 +90,7 @@ const navigate=useNavigate()
     ev: React.FormEvent<EventTarget>
   ): Promise<void> => {
     ev.preventDefault();
-    const response = await axios.post("/api/users/register", data);
+    const response = await axios.post("https://formregister-yy1l.onrender.com/api/users/register", data);
     if(response.status===201){
       alert(response.data.msg)
          navigate("/dashboard")

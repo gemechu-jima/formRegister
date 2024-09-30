@@ -69,7 +69,7 @@ export default function UserData() {
   }
   const handleDelete=async(id:number)=>{
     try {
-      const response=await axios.delete(`/api/users/${id}`)
+      const response=await axios.delete(`https://formregister-yy1l.onrender.com/api/users/${id}`)
       console.log((response))
       if(response.status===204){
         alert(response.data.msg);
