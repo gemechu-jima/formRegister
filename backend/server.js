@@ -15,9 +15,7 @@ const port=process.env.PORT
 const ip=process.env.IP
 
 app.use(express.json())
-app.use(cors(
-{origin: allowedOrigins}
-))
+app.use(cors())
 app.use(morgan("dev"))
 
 app.use("/api/users", registerFormRoutes)
