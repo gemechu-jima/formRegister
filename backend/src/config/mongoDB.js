@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
-dotenv.config({path:path.join(__dirname, "../.env")})
+// import path from "path"
+// dotenv.config({path:path.join(__dirname, "../.env")})
 
 const connect=mongoose.connect(process.env.MONGODB_URL)
 connect.then(()=>{

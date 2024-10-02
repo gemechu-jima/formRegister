@@ -40,7 +40,7 @@ export default function UserData() {
     try {
       const response = await axios({
         method:"GET",
-        url:"/api/users",
+        url:"https://formregister-yy1l.onrender.com/api/users",
         headers:{
           Authorization:`Bearer ${token}`,
           "Content-Type":"application/json"
